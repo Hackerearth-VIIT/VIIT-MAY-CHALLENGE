@@ -1,0 +1,56 @@
+#include <bits/stdc++.h> 
+using namespace std; 
+string findWinner(string s) ;
+
+
+ // } Driver Code Ends
+
+
+//User function Template for C++
+
+string findWinner(string s) 
+{
+    // Your code goes here
+    int i, count = 0, n;
+    n = s.length();
+    stack<char> st;
+  
+    // ckecking the top of the stack with
+    // the i th character of the string
+    // add it to the stack if they are different
+    // otherwise increment count
+    for (i = 0; i < n; i++) {
+        if (st.empty() || st.top() != s[i]) {
+            st.push(s[i]);
+        }
+        else {
+            count++;
+            st.pop();
+        }
+    }
+  
+    // Check who has won
+    if (count % 2 == 0) {
+        return "German";
+    }
+    else {
+        return "Ellen";
+    }
+}
+
+// { Driver Code Starts.
+
+int main() 
+{   
+    // freopen("in03.txt","r",stdin);
+    // freopen("out04.txt","w+",stdout);
+	int t; 
+	cin>>t;
+	while(t--)
+	{
+		string s;
+		cin>>s;
+		cout<<findWinner(s)<<endl; 
+	}
+	return 0; 
+} 

@@ -1,0 +1,130 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+ // } Driver Code Ends
+
+
+
+class Solution
+{
+    public:
+    //Function to find the number of islands.
+    void noofisland(vector<vector<char>>& mat,int i, int j,int r,int c){
+        
+        if(i >= r || j >= c || i < 0 || j < 0 || mat[i][j] != 'L')
+          return;
+       
+        mat[i][j] = 'V';
+        
+        noofisland(mat,i - 1,j,r,c);
+        noofisland(mat,i,j + 1,r,c);
+        noofisland(mat,i,j - 1,r,c);
+        noofisland(mat,i + 1,j,r,c);
+        noofisland(mat,i - 1,j - 1,r,c);
+        noofisland(mat,i - 1,j + 1,r,c);
+        noofisland(mat,i + 1,j - 1,r,c);
+        noofisland(mat,i + 1,j + 1,r,c);
+    }
+    int largest_island(vector<vector<char>>& mat,int i, int j,int r,int c,int &count){
+        
+        if(i >= r || j >= c || i < 0 || j < 0 || mat[i][j] != 'L')
+          return 0;
+       
+            mat[i][j] = 'V';
+            count += 1;
+       
+       
+        
+        largest_island(mat,i - 1,j,r,c,count);
+        largest_island(mat,i,j + 1,r,c,count);
+        largest_island(mat,i,j - 1,r,c,count);
+        largest_island(mat,i + 1,j,r,c,count);
+        largest_island(mat,i - 1,j - 1,r,c,count);
+        largest_island(mat,i - 1,j + 1,r,c,count);
+        largest_island(mat,i + 1,j - 1,r,c,count);
+        largest_island(mat,i + 1,j + 1,r,c,count);
+     
+     return count;
+    }
+    int  fun1(vector<vector<char>> grid) 
+    {
+        // Code here
+        int r = grid.size();
+        if(r == 0){
+            return 0;
+        }
+          
+        int c = grid[0].size();
+        
+        int no_of_islands = 0;
+        
+       
+        for(int i = 0; i < r; ++i){
+            for(int j = 0; j < c; ++j){
+                if(grid[i][j] == 'L'){
+                   
+                   noofisland(grid,i,j,r,c);
+                   no_of_islands += 1;
+                   
+                   
+                }
+            }
+        }
+        return no_of_islands;
+       
+    }
+    
+    int  fun2(vector<vector<char>> grid) 
+    {
+        // Code here
+        int r = grid.size();
+        if(r == 0){
+            return 0;
+        }
+          
+        int c = grid[0].size();
+        
+        int cnt;
+        int mx_is = 0;
+       
+        for(int i = 0; i < r; ++i){
+            for(int j = 0; j < c; ++j){
+                if(grid[i][j] == 'L'){
+                   cnt = 0;
+                   cnt  = largest_island(grid,i,j,r,c,cnt);
+                   mx_is = max(mx_is,cnt);
+                   
+                   
+                }
+            }
+        }
+        return mx_is;
+       
+    }
+};
+
+
+int main(){
+	int tc;
+	cin >> tc;
+	while(tc--){
+		int n, m;
+		cin >> n >> m;
+		vector<vector<char>>grid1(n, vector<char>(m, '#'));
+		for(int i = 0; i < n; i++){
+			for(int j = 0; j < m; j++){
+				cin >> grid1[i][j];
+			}
+		}
+		vector<vector<char>>grid2(n, vector<char>(m, '#'));
+		for(int i = 0; i < n; i++){
+			for(int j = 0; j < m; j++){
+			   grid2[i][j] = grid1[i][j];
+			}
+		}
+		Solution obj;
+	    cout << obj.fun1(grid1) << " " << obj.fun2(grid2) << "\n";
+	
+	}
+	return 0;
+} 

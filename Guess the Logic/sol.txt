@@ -1,0 +1,40 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main(){
+      
+    //   freopen("in03.txt", "r",stdin);
+    //   freopen("out03.txt","w+",stdout);
+
+      int t; 
+       cin >> t;
+      while(t--){
+          string ans = "";
+          int r;
+           cin >> r;
+           
+           while(r > 0){
+          int rem = r % 10;
+       
+         ans = ans + to_string(rem^2);
+          r /= 10;
+         }
+         
+         int i = 0;
+         while(ans[i] == '0' && i < ans.length())
+           i++;
+        if(i == ans.length())
+          cout << "0" << "\n";
+        else{
+                for(int j = i; j < ans.length(); ++j)
+                cout << ans[j];
+                cout << "\n"; 
+        }
+        
+         
+          
+      }
+      
+    
+    return 0;
+    
+}

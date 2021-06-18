@@ -1,0 +1,57 @@
+
+#include <bits/stdc++.h>
+using namespace std;
+#define Max 1000000
+#define ll long long
+ll Prime_sum[Max];
+void soe(){
+    bool prime[Max];
+    memset(prime,true,sizeof(prime));
+    
+    prime[1] = false;
+    
+    int i  =  2;
+    
+    while(i*i <= Max){
+        
+        if(prime[i]){
+            
+            for(int p = i*i; p <= Max; p = p + i){
+            prime[p] = false;
+           }
+            
+        }
+        
+        i += 1;
+    }
+    
+    for(int i = 1; i <= Max; ++i){
+        if(prime[i]){
+            Prime_sum[i] = 1 + Prime_sum[i - 1];
+        }
+        else Prime_sum[i] += Prime_sum[i - 1];
+    }
+}
+
+int main(){
+    
+    // freopen("in02.txt","r",stdin);
+    // freopen("out02.txt","w+",stdout);
+    
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
+     soe();
+
+    int t;
+     cin >> t;
+    while(t--){
+        ll n;
+         cin >> n;
+        
+        cout << Prime_sum[n] + 1 << "\n";
+
+    }
+   
+  return 0;
+}

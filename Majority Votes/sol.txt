@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main(){
+    
+  //  freopen("in03.txt","r",stdin);
+   // freopen("out03.txt","w+",stdout);
+
+    int n;
+     cin >> n;
+    long long ar[n];
+    unordered_map<long long,int> mp;
+    
+    for(int i = 0; i < n; ++i){
+        cin >> ar[i];
+        mp[ar[i]]++;
+    }
+    long long mx = 0, mx_ele = 0;
+    for(int i = 0; i < n; ++i){
+        if(mx < mp[ar[i]]){
+            mx = mp[ar[i]];
+            mx_ele = ar[i];
+        }
+    }
+    cout << mx_ele;
+    
+    return 0;
+    
+}
+
+

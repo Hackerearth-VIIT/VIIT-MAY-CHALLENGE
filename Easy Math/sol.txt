@@ -1,0 +1,20 @@
+#include <bits/stdc++.h>
+using namespace std;
+bool c3(int n){
+	string s = to_string(n);
+	for(char c : s){
+		if(c == '3')
+		  return false;
+	}
+	return true;
+}
+int main(){
+	int n;
+	 cin >> n;
+	for(int i = n + 1; true; ++i){
+		if((i % 3) and c3(i)){
+			cout << i;
+			break;
+		}
+	}
+}
